@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
-        header("Location: posts.php");
+        header("Location: index.php");
+        exit();
     } else {
         echo "Usuario o contraseña incorrectos.";
     }
@@ -24,15 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="secion.css">
 </head>
 <body>
-    <h2>Iniciar Sesión</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Nombre de usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Iniciar Sesión</button>
-    </form>
-    <a href="register.php">Crear una cuenta</a>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Nombre de usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <div class="button-container">
+                <button type="submit">Iniciar Sesión</button>
+                <button type="button" onclick="window.location.href='register.php'">Crear una cuenta</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
